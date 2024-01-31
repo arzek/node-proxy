@@ -28,6 +28,7 @@ app.get('/', async (req, res) => {
         const content = await page.content();
         res.send(content);
     } catch (e) {
+        console.log(e);
         res.send({ status: 'Error' });
     }
 })
