@@ -1,3 +1,4 @@
+# Base image
 FROM node
 
 WORKDIR /usr/src/app
@@ -16,8 +17,21 @@ RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN apt-get install -y ffmpeg
 
+
+
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
+COPY yarn.lock ./
+
+# Install app dependencies
+RUN yarn
+
+# Bundle app source
 COPY . .
 
-RUN npm i
+# Creates a "dist" folder with the production build
 
-CMD node index.js
+EXPOSE 3000
+
+# Start the server using the production build
+CMD [ "npm", "run", "start:prod" ]
