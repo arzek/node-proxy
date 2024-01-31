@@ -32,7 +32,11 @@ app.get('/', async (req, res) => {
     }
 })
 
+
 app.listen(port, async () => {
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({
+        args: ['--no-sandbox'], // Required.
+        executablePath: null,
+    });
     console.log(`Example app listening on port ${port}`)
 })
