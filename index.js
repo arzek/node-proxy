@@ -34,7 +34,7 @@ app.get('/', async (req, res) => {
 })
 
 
-app.listen(port, async () => {
+app.listen(process.env.PORT || 3000, '0.0.0.0', async () => {
     browser = await puppeteer.launch({
         args: ['--no-sandbox'], // Required.
         executablePath: null,
